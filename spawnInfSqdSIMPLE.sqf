@@ -1,4 +1,11 @@
-// Spawn a squad of infantry and send them on a few waypoints
+/* Spawn a squad of infantry and send them on a few waypoints
+
+	Requirements/Assumptions:
+		-uses a marker on map named "spawn1" as the point where units will be spawned
+		-uses CSAT units (change _unitsInf to other factions if desired)
+		-creates a 10-man squad (can change the 10 to anything)
+		-uses markers on map named WP1a, WP1b and WP1c for the waypoints for the squad
+*/
 
 if (!isServer) exitwith {}; //This script should only run on the server
 
@@ -27,14 +34,14 @@ for "_x" from 1 to 10 do {
 
 
 //Now assign waypoints to the squad:--------------------------------------------------------------------
-_wp = _squadInf addWaypoint [getMarkerPos "WP1a",40]; //assumes a marker named "WP1a" is on map
+_wp = _squadInf addWaypoint [getMarkerPos "WP1a",0]; //assumes a marker named "WP1a" is on map
 _wp setWaypointType "MOVE";
 _wp setWaypointFormation "DIAMOND";
 
-_wp = _squadInf addWaypoint [getMarkerPos "WP1b",40];//assumes a marker named "WP1b" is on map
+_wp = _squadInf addWaypoint [getMarkerPos "WP1b",20];//assumes a marker named "WP1b" is on map
 _wp setWaypointType "MOVE";
 _wp setWaypointBehaviour "COMBAT";
-_wp setWaypointTimeout [20,40,60];
 
-_wp = _squadInf addWaypoint [getMarkerPos "WP1c",40];//assumes a marker named "WP1c" is on map
-_wp setWaypointType "MOVE";
+_wp = _squadInf addWaypoint [getMarkerPos "WP1c",50];//assumes a marker named "WP1c" is on map
+_wp setWaypointType "SAD";
+_wp setWaypointTimeout [180,240,300];
