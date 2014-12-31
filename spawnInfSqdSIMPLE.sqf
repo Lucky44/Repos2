@@ -1,9 +1,9 @@
 /* Spawn a squad of infantry and send them on a few waypoints
 
-	Requirements/Assumptions:
-		-uses a marker on map named "spawn1" as the point where units will be spawned
+Requirements/Assumptions:
 		-uses CSAT units (change _unitsInf to other factions if desired)
 		-creates a 10-man squad (can change the 10 to anything)
+		-uses a marker on map named "spawn1" as the point where units will be spawned
 		-uses markers on map named WP1a, WP1b and WP1c for the waypoints for the squad
 */
 
