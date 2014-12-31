@@ -70,7 +70,7 @@ private ["_rndSpd","_rndBhv","_rndTO","_rndForm","_rndType","_rnd","_units","_sq
                         unitsInf = [
                                 "CAF_AG_AFR_PK","CAF_AG_AFR_PK",
                                 "CAF_AG_AFR_RPK","CAF_AG_AFR_RPK",
-                                "CAF_AG_AFR_AK74GL",
+                                "CAF_AG_AFR_GL",
                                 "CAF_AG_AFR_RPG","CAF_AG_AFR_RPG","CAF_AG_AFR_RPG",
                                 "CAF_AG_AFR_AK47","CAF_AG_AFR_AK47","CAF_AG_AFR_AK74","CAF_AG_AFR_AK74"]; //note that there is no comma after the final unit listing
                 };
