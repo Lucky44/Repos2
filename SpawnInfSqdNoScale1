@@ -1,5 +1,5 @@
 /*  Spawn units at randomized, predetermined locations and then send them moving on WPs
-    This version does not scale to the number of players, so the number of squads spawned is configured in the init box code used
+    This version does NOT scale to the number of players, so the number of squads spawned is configured in the init box code used
         by TAW_Lucky
 
         Comments explain more info about the configurable elements.
@@ -97,9 +97,8 @@ private ["_rndSpd","_rndBhv","_rndTO","_rndForm","_rndType","_rnd","_units","_sq
                 };
 
 
-//--SECTION 3: DO NOT ALTER ANYTHING BELOW THIS LINE --------------------------------------------------------------------
+//--SECTION 2: DO NOT ALTER ANYTHING BELOW THIS LINE --------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------
-
 
 //(_HostileSquadMinBASE + (west countside allunits)/_sqdFactor); // sets max group size (base) to consider totaly players. Next: modified by DifficultyFactor
 
@@ -113,7 +112,6 @@ if (_HostileSquadRange <=0) then {_HostileSquadRange = 1};
 
 for "_n" from 1 to _numSqds do {
     _spawnPt = getMarkerPos ((_this select 1) call BIS_fnc_selectRandom); //turns marker name into [x,y,z] position array
-
     _size = _HostileSquadMin + (floor(random _HostileSquadRange)); // random group size, based on configuration at top
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -125,10 +123,7 @@ for "_n" from 1 to _numSqds do {
                 //sleep 1;
         };/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
         //Add randomized waypoints for INF group to move and patrol^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
         _markerCount = (count _waypointMarkers) - 1;
         {
                 _markerName = "";
@@ -146,7 +141,7 @@ for "_n" from 1 to _numSqds do {
         _rndForm = random 1; //randomize Formation
         _rndTO = random 30; //randomize Time Out
 
-                // create and assign the waypoint
+        // create and assign the waypoint
         if (_forEachIndex != _markerCount) then {
 
             _wp = _squadInf addWaypoint [getMarkerPos _markerName, 0]; //the number (default is 0) is the radius w/in which the WP will be, randomly
