@@ -27,7 +27,7 @@ _spawnPt = getMarkerPos "spawn1";
 //spawn infantry units^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 _squadInf = createGroup East;//create a new group to put the units in
 for "_x" from 1 to 10 do {
-        _spawnee = unitsInf call BIS_fnc_selectRandom;
+        _spawnee = _unitsInf call BIS_fnc_selectRandom;
         _spawnee createUnit [_spawnPt, _squadInf];
 };
 
