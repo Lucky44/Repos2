@@ -24,7 +24,7 @@
 //--SECTION 1 --------------------------------------------------------------------------------------------------
 if (!isServer) exitwith {};
 
-private ["_rndSpd","_rndBhv","_rndTO","_rndForm","_rndType","_rnd","_units","_squadInf","_HostileSquadMinBase","_HostileSqdMaxBase","_DifficultyFactor","_HostileSquadRange","_spawnPt","_size","_spawnee","_faction","_sqdRatio","_numSqds"];
+private ["_rndSpd","_rndBhv","_rndTO","_rndForm","_rndType","_rnd","_units","_unitsInf","_squadInf","_HostileSquadMinBase","_HostileSqdMaxBase","_DifficultyFactor","_HostileSquadRange","_spawnPt","_size","_spawnee","_faction","_sqdRatio","_numSqds"];
 
 
         //Set the squad minimum size; this is a hard bottom limit; total size will be randomized.
@@ -47,7 +47,7 @@ private ["_rndSpd","_rndBhv","_rndTO","_rndForm","_rndType","_rnd","_units","_sq
         //For example, if you put more medics in the list (e.g., "O_medic_F","O_medic_F","O_medic_F",), that will make it more likely medics will spawn
                 //using CSAT units:
                 if (_faction == "CSAT") then {
-                        unitsInf = ["O_soldier_LAT_F",
+                        _unitsInf = ["O_soldier_LAT_F",
                                 "O_soldier_F","O_soldier_F","O_soldier_F",
                                 "O_medic_F",
                                 "O_soldier_Lite_F","O_soldier_lite_F",
@@ -57,7 +57,7 @@ private ["_rndSpd","_rndBhv","_rndTO","_rndForm","_rndType","_rnd","_units","_sq
 
                 //use CAF Euro units:
                 if (_faction == "CAFeu") then {
-                        unitsInf = [
+                        _unitsInf = [
                                 "CAF_AG_EUR_PK","CAF_AG_EUR_PK",
                                 "CAF_AG_EUR_RPK","CAF_AG_EUR_RPK",
                                 "CAF_AG_EUR_AK74GL",
@@ -67,7 +67,7 @@ private ["_rndSpd","_rndBhv","_rndTO","_rndForm","_rndType","_rnd","_units","_sq
 
                 //use CAF African PIRATE units:
                 if (_faction == "CAFafP") then {
-                        unitsInf = [
+                        _unitsInf = [
                                 "CAF_AG_AFR_P_PKM","CAF_AG_AFR_P_PKM",
                                 "CAF_AG_AFR_P_RPK74",
                                 "CAF_AG_AFR_P_SVD",
@@ -78,7 +78,7 @@ private ["_rndSpd","_rndBhv","_rndTO","_rndForm","_rndType","_rnd","_units","_sq
 
                 //use CAF African units:
                 if (_faction == "CAFaf") then {
-                        unitsInf = [
+                        _unitsInf = [
                                 "CAF_AG_AFR_PK","CAF_AG_AFR_PK",
                                 "CAF_AG_AFR_RPK","CAF_AG_AFR_RPK",
                                 "CAF_AG_AFR_GL",
@@ -88,7 +88,7 @@ private ["_rndSpd","_rndBhv","_rndTO","_rndForm","_rndType","_rnd","_units","_sq
 
                 //use CAF Middle East units:
                 if (_faction == "CAFme") then {
-                        unitsInf = [
+                        _unitsInf = [
                                 "CAF_AG_ME_PK","CAF_AG_ME_PK",
                                 "CAF_AG_ME_RPK","CAF_AG_ME_RPK",
                                 "CAF_AG_ME_GL","CAF_AG_ME_GL",
@@ -122,7 +122,7 @@ for "_n" from 1 to _numSqds do {
         //spawn infantry units^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         _squadInf = createGroup East;
         for "_x" from 1 to _size do {
-                _spawnee = unitsInf call BIS_fnc_selectRandom;
+                _spawnee = _unitsInf call BIS_fnc_selectRandom;
                 _spawnee createUnit [_spawnPt, _squadInf];
                 //sleep 1;
         };/////////////////////////////////////////////////////////////////////////////////////////////////////
