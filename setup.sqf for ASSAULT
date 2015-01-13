@@ -1,0 +1,213 @@
+/*
+Randomly choose camps where OpFor will defend,
+Randomize the positions of Seconday Objectives at these camps,
+Pick one of four BluFor FARPs to have OpFor in control of at start
+*/
+
+if (!isServer) exitWith {};
+
+private ["_choice","_choiceArray","_campsArray","_camp","_element","_newArray","_secObjs","_names","_campsInUse","_farpArray","_FARPnums","_FARPnum","_farp1","_farp1_1","_farp1_2","_farp1_3"];
+
+_choiceArray = [1,2,3,4,5,6,7,8];
+_campsArray = ["camp1","camp2","camp3","camp4","camp5","camp6","camp7","camp8"];
+_secObjs = [uplink1,tent1,tower1,colonel1];
+_names = ["name1","name2","name3","name4","name5","name6","name7","name8"];
+_campsInUse = [];
+temp=0;//can this be just removed from the script and here?
+
+
+//BIG LOOP TO CHOOSE AND SET UP 4 CAMPS/////////////////////////////////////--------------------------------------------------
+for "_i" from 0 to 3 do {
+
+	//Choose the camp for this iteration of the loop
+	_choice = _choiceArray call BIS_fnc_selectRandom;
+	_element = (_choice -1);
+	_newArray = [_choice]; //create a new array with only the chosen camp as an element
+	_choiceArray = _choiceArray - _newArray; //remove the chosen camp from _campsArray so it can't be selected again
+
+	_camp = _campsArray select _element; //pick the corresponding camp marker
+	(_secObjs select _i) setPos (getMarkerPos _camp); //position the secondary objective at the chosen camp
+
+	_campsInUse = _campsInUse + _newArray;//build list of camps in use
+
+//hint format ["Loop %1: Camp is %2",_i,_choice];//debugging only!!!!!!!!!!!!!!!
+//sleep 3;//debugging only!!!!!!!!!!!!!!!!
+
+
+	///////////////////////////////////////////////////////////////////////////////
+	//Now spawn the OpFor infantry, air and vehicles for the chosen camp
+	switch (_choice) do
+	{
+		case 1:
+		{
+			handle = [temp, "spawnAir1", "CSAT",["WPV1a","WPV1b","WPV1c","WPV1z"]]  execVM "scripts\spawnAir1.sqf";
+			sleep 2;
+			handle = [temp, "spawnV1", "CSAT",["WPV1a","WPV1b","WPV1c","WPV1d","WPV1e","WPV1z"]]  execVM "scripts\spawnVeh1.sqf";
+			sleep 2;
+			handle = [temp, ["spawn1"], "CSAT",["WP1a","WP1b","WP1c","WP1d","WP1e","WP1z"]]  execVM "scripts\spawnInfSCALE1.sqf";
+			sleep 10;
+		};
+
+		case 2:
+		{
+			handle = [temp, "spawnAir2", "CSAT",["WPV2a","WPV2b","WPV2c","WPV2z"]]  execVM "scripts\spawnAir1.sqf";
+			sleep 2;
+			handle = [temp, "spawnV2", "CSAT",["WPV2a","WPV2b","WPV2c","WPV2d","WPV2e","WPV2z"]]  execVM "scripts\spawnVeh1.sqf";
+			sleep 2;
+			handle = [temp, ["spawn2"], "CSAT",["WP2a","WP2b","WP2c","WP2d","WP2e","WP2z"]]  execVM "scripts\spawnInfSCALE1.sqf";
+			sleep 10;
+		};
+
+		case 3:
+		{
+			handle = [temp, "spawnAir3", "CSAT",["WPV3a","WPV3b","WPV3c","WPV3z"]]  execVM "scripts\spawnAir1.sqf";
+			sleep 2;
+			handle = [temp, "spawnV3", "CSAT",["WPV3a","WPV3b","WPV3c","WPV3d","WPV3e","WPV3z"]]  execVM "scripts\spawnVeh1.sqf";
+			sleep 3;
+			handle = [temp, ["spawn3"], "CSAT",["WP3a","WP3b","WP3c","WP3d","WP3e","WP3z"]]  execVM "scripts\spawnInfSCALE1.sqf";
+			sleep 10;
+		};
+
+		case 4:
+		{
+			handle = [temp, "spawnAir4", "CSAT",["WPV4a","WPV4b","WPV4c","WPV4z"]]  execVM "scripts\spawnAir1.sqf";
+			sleep 3;
+			handle = [temp, "spawnV4", "CSAT",["WPV4a","WPV4b","WPV4c","WPV4d","WPV4e","WPV4z"]]  execVM "scripts\spawnVeh1.sqf";
+			sleep 3;
+			handle = [temp, ["spawn4"], "CSAT",["WP4a","WP4b","WP4c","WP4d","WP4e","WP4z"]]  execVM "scripts\spawnInfSCALE1.sqf";
+			sleep 10;
+		};
+
+		case 5:
+		{
+			handle = [temp, "spawnAir5", "CSAT",["WPA5a","WPA5b","WPA5c","WPA5z"]]  execVM "scripts\spawnAir1.sqf";
+			sleep 2;
+			handle = [temp, "spawnV5", "CSAT",["WPV5a","WPV5b","WPV5c","WPV5d","WPV5e","WPV5z"]]  execVM "scripts\spawnVeh1.sqf";
+			sleep 3;
+			handle = [temp, ["spawn5"], "CSAT",["WP5a","WP5b","WP5c","WP5z"]]  execVM "scripts\spawnInfSCALE1.sqf";
+			sleep 10;
+		};
+
+		case 6:
+		{
+			handle = [temp, "spawnAir6", "CSAT",["WPA6a","WPA6b","WPA6c","WPA6z"]]  execVM "scripts\spawnAir1.sqf";
+			sleep 2;
+			handle = [temp, "spawnV6", "CSAT",["WPV6a","WPV6b","WPV6c","WPV6d","WPV6e","WPV6z"]]  execVM "scripts\spawnVeh1.sqf";
+			sleep 3;
+			handle = [temp, ["spawn6"], "CSAT",["WP6a","WP6b","WP6c","WP6z"]]  execVM "scripts\spawnInfSCALE1.sqf";
+			sleep 10;
+		};
+
+		case 7:
+		{
+			handle = [temp, "spawnAir7", "CSAT",["WPV7a","WPV7b","WPV7c","WPV7z"]]  execVM "scripts\spawnAir1.sqf";
+			sleep 2;
+			handle = [temp, "spawnV7", "CSAT",["WPV7a","WPV7b","WPV7c","WPV7d","WPV7e","WPV7z"]]  execVM "scripts\spawnVeh1.sqf";
+			sleep 3;
+			handle = [temp, ["spawn7"], "CSAT",["WP7a","WP7b","WP7c","WP7d","WP7e","WP7z"]]  execVM "scripts\spawnInfSCALE1.sqf";
+			sleep 10;
+		};
+
+		case 8:
+		{
+			handle = [temp, "spawnAir8", "CSAT",["WPA8a","WPA8b","WPA8c","WPA8z"]]  execVM "scripts\spawnAir1.sqf";
+			sleep 2;
+			handle = [temp, "spawnV8", "CSAT",["WPV8a","WPV8b","WPV8c","WPV8d","WPV8e","WPV8z"]]  execVM "scripts\spawnVeh1.sqf";
+			sleep 3;
+			handle = [temp, ["spawn8"], "CSAT",["WP8a","WP8b","WP8c","WP8z"]]  execVM "scripts\spawnInfSCALE1.sqf";
+			sleep 10;
+		};
+
+	};
+
+};//end of loop for each camp////////////////////////////////--------------------------------------------------------------
+
+//initialize arrays of objects at FARPs-------------
+_farp1 = [wall1,wall2,wall3,wall4,wall5,wall6,wall7,wall8,wall9,wall10,wall11,wall12,
+	wall13,wall14,wall15,wall16,wall17,wall18,wall19,wall20,wall21,wall22,wall23,wall24,wall25,
+	bunker1,helipad1,truck1,truck2,truck3,vammo1,vammo2,vammo3,can1,can2,can3,can4,track1,track2,track3,track4,track5,
+	wheel1,wheel2,wheel3,flag1,tena1,box1,crate1,crate2,crate3,crate4,crate5,crate6,net1,net2,net3];
+_farp1_1 = [wall1_1,wall2_1,wall3_1,wall4_1,wall5_1,wall6_1,wall7_1,wall8_1,wall9_1,wall10_1,wall11_1,wall12_1,
+	wall13_1,wall14_1,wall15_1,wall16_1,wall17_1,wall18_1,wall19_1,wall20_1,wall21_1,wall22_1,wall23_1,wall24_1,wall25_1,
+	bunker1_1,helipad1_1,truck1_1,truck2_1,truck3_1,vammo1_1,vammo2_1,vammo3_1,can1_1,can2_1,can3_1,can4_1,track1_1,track2_1,track3_1,track4_1,track5_1,
+	wheel1_1,wheel2_1,wheel3_1,flag1_1,tena1_1,box1_1,crate1_1,crate2_1,crate3_1,crate4_1,crate5_1,crate6_1,net1_1,net2_1,net3_1];
+_farp1_2 = [wall1_2,wall2_2,wall3_2,wall4_2,wall5_2,wall6_2,wall7_2,wall8_2,wall9_2,wall10_2,wall11_2,wall12_2,
+	wall13_2,wall14_2,wall15_2,wall16_2,wall17_2,wall18_2,wall19_2,wall20_2,wall21_2,wall22_2,wall23_2,wall24_2,wall25_2,
+	bunker1_2,helipad1_2,truck1_2,truck2_2,truck3_2,vammo1_2,vammo2_2,vammo3_2,can1_2,can2_2,can3_2,can4_2,track1_2,track2_2,track3_2,track4_2,track5_2,
+	wheel1_2,wheel2_2,wheel3_2,flag1_2,tena1_2,box1_2,crate1_2,crate2_2,crate3_2,crate4_2,crate5_2,crate6_2,net1_2,net2_2,net3_2];
+_farp1_3 = [wall1_3,wall2_3,wall3_3,wall4_3,wall5_3,wall6_3,wall7_3,wall8_3,wall9_3,wall10_3,wall11_3,wall12_3,
+	wall13_3,wall14_3,wall15_3,wall16_3,wall17_3,wall18_3,wall19_3,wall20_3,wall21_3,wall22_3,wall23_3,wall24_3,wall25_3,
+	bunker1_3,helipad1_3,truck1_3,truck2_3,truck3_3,vammo1_3,vammo2_3,vammo3_3,can1_3,can2_3,can3_3,can4_3,track1_3,track2_3,track3_3,track4_3,track5_3,
+	wheel1_3,wheel2_3,wheel3_3,flag1_3,tena1_3,box1_3,crate1_3,crate2_3,crate3_3,crate4_3,crate5_3,crate6_3,net1_3,net2_3,net3_3];
+
+//Choose the FARP to be populated and recaptured////////////////////////////////////////////////////////////////////
+_FARParray = ["farp0","farp1","farp2","farp3"];
+_FARPnums = [0,1,2,3];
+
+_element = floor(random 4);//random integer from 0-3
+//_FARPnum = _element;
+
+_FARPchoice = _farpArray select _element;
+_newArray = [_FARPchoice]; //create a new array with only the chosen camp as an element
+_FARParray = _FARParray - _newArray; //remove the chosen camp from _campsArray so the ones not chosen can be deleted.
+
+switch (_element) do
+{
+	case 0:
+	{
+		handle = [temp, "spawnAir9", "CSAT",["WPA9a","WPA9b","WPA9c","WPA9z"]]  execVM "scripts\spawnAir1.sqf";
+		sleep 2;
+		handle = [temp, "spawnV9", "CSAT",["WPV9a","WPV9b","WPV9c","WPV9d","WPV9e","WPV9z"]]  execVM "scripts\spawnVeh1.sqf";
+		sleep 3;
+		handle = [temp, ["spawn9"], "CSAT",["WP9a","WP9b","WP9c","WP9z"]]  execVM "scripts\spawnInfSCALE1.sqf";
+		deleteMarker "farp1"; deleteMarker "farp2"; deleteMarker "farp3";
+		{deleteVehicle _x} forEach _farp1_1; {deleteVehicle _x} forEach _farp1_2; {deleteVehicle _x} forEach _farp1_3;
+	};
+
+	case 1:
+	{
+		handle = [temp, "spawnAir10", "CSAT",["WPA10a","WPA10b","WPA10c","WPA10z"]]  execVM "scripts\spawnAir1.sqf";
+		sleep 2;
+		handle = [temp, "spawnV10", "CSAT",["WPV10a","WPV10b","WPV10c","WPV10d","WPV10e","WPV10z"]]  execVM "scripts\spawnVeh1.sqf";
+		sleep 3;
+		handle = [temp, ["spawn10"], "CSAT",["WP10a","WP10b","WP10c","WP10z"]]  execVM "scripts\spawnInfSCALE1.sqf";
+		deleteMarker "farp0"; deleteMarker "farp2"; deleteMarker "farp3";
+		{deleteVehicle _x} forEach _farp1; {deleteVehicle _x} forEach _farp1_2; {deleteVehicle _x} forEach _farp1_3;
+	};
+
+	case 2:
+	{
+		handle = [temp, "spawnAir11", "CSAT",["WPV11a","WPV11b","WPV11c","WPV11z"]]  execVM "scripts\spawnAir1.sqf";
+		sleep 2;
+		handle = [temp, "spawnV11", "CSAT",["WPV11a","WPV11b","WPV11c","WPV11d","WPV11e","WPV11z"]]  execVM "scripts\spawnVeh1.sqf";
+		sleep 3;
+		handle = [temp, ["spawn11"], "CSAT",["WP11a","WP11b","WP11c","WP11d","WP11e","WP11z"]]  execVM "scripts\spawnInfSCALE1.sqf";
+		deleteMarker "farp0"; deleteMarker "farp1"; deleteMarker "farp3";
+		{deleteVehicle _x} forEach _farp1; {deleteVehicle _x} forEach _farp1_1; {deleteVehicle _x} forEach _farp1_3;
+	};
+
+	case 3:
+	{
+		handle = [temp, "spawnAir12", "CSAT",["WPA12a","WPA12b","WPA12c","WPA12z"]]  execVM "scripts\spawnAir1.sqf";
+		sleep 2;
+		handle = [temp, "spawnV12", "CSAT",["WPV12a","WPV12b","WPV12c","WPV12d","WPV12e","WPV12z"]]  execVM "scripts\spawnVeh1.sqf";
+		sleep 3;
+		handle = [temp, ["spawn12"], "CSAT",["WP12a","WP12b","WP12c","WP12z"]]  execVM "scripts\spawnInfSCALE1.sqf";
+		deleteMarker "farp0"; deleteMarker "farp1"; deleteMarker "farp2";
+		{deleteVehicle _x} forEach _farp1; {deleteVehicle _x} forEach _farp1_1; {deleteVehicle _x} forEach _farp1_2;
+	};
+};//end of loop to set up FARP
+
+_info = format ["_names is %1, campsArray is %2",_names,_campsArray];
+[west,"HQ"] sidechat _info;
+//sleep 6;
+
+
+//now delete the remaining Camp Name markers
+for "_i" from 0 to 3 do {
+	deleteMarker (_names select _i );
+	//deleteMarker (_campsArray select _i);
+};
+
+
+//hint format ["Camps in use: %1",_campsInUse];
